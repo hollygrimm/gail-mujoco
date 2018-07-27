@@ -63,7 +63,7 @@ class Mujoco_Dset(object):
         self.obs = np.array(flatten(obs))
         self.acs = np.array(flatten(acs))
 
-        self.rets = traj_data['rets'][:traj_limitation] # BUGFIX: run_mujoco.py 138 names it 'rets'
+        self.rets = traj_data['ep_rets'][:traj_limitation] # BUGFIX: run_mujoco.py 138 names it 'rets', expert data from download uses ep_rets
         self.avg_ret = sum(self.rets)/len(self.rets)
         self.std_ret = np.std(np.array(self.rets))
         if len(self.acs) > 2:
