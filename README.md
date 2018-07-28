@@ -71,6 +71,26 @@ python -m gail-eval --env=Humanoid
 
 ![Humanoid unnormalized scores](result/Humanoid-unnormalized-deterministic-scores.png)
 
+
+
+## Run GAIL training on HumanoidStandup
+```
+python -m baselines.gail.run_mujoco --traj_limitation=5 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
+python -m baselines.gail.run_mujoco --traj_limitation=50 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
+```
+
+## Run BC training on HumanoidStandup
+```
+python -m behavior_clone --traj_limitation=5 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
+TODO: python -m behavior_clone --traj_limitation=50 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
+```
+## Create HumanoidStandup Charts
+```
+TODO: python -m gail-eval --env=HumanoidStandup
+```
+
+
+
 ## Evaluate Hopper
 ```
 python -m baselines.gail.run_mujoco --task evaluate --save_sample --load_model_path   checkpoint/trpo_gail.transition_limitation_-1.Hopper.g_step_3.d_step_1.policy_entcoeff_0.adversary_entcoeff_0.001.seed_0/trpo_gail.transition_limitation_-1.Hopper.g_step_3.d_step_1.policy_entcoeff_0.adversary_entcoeff_0.001.seed_0
