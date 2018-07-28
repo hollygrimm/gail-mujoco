@@ -7,6 +7,7 @@ import argparse
 import os
 import glob
 import gym
+from gym import wrappers
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -67,7 +68,10 @@ def evaluate_env(env_name, seed, policy_hidden_size, stochastic, reuse, prefix):
         upper_bound = sum(dataset.rets[:limit])/limit
         checkpoint_dir = get_checkpoint_dir(checkpoint_list, limit, prefix=prefix)
         checkpoint_path = tf.train.latest_checkpoint(checkpoint_dir)
-        env = gym.make(env_name + '-v2') # BUGFIX: with the latest Gym, most MuJoCO envs are -v2
+        env = gym.make(env_name + '-v1') # FIX: with MuJoCo 1.50, MuJoCo envs are -v2
+        env = wrappers.Monitor(env, checkpoint_dir, force=True) # ENHANCEMENT: Generate and save videos to checkpoint_dir
+        # Errors with ERROR: GLEW initalization error: Missing GL version on MuJoCo 1.50, set LD_PRELOAD
+        # https://github.com/openai/mujoco-py/issues/44
         env.seed(seed)
         print('Trajectory limitation: {}, Load checkpoint: {}, '.format(limit, checkpoint_path))
         avg_len, avg_ret = run_mujoco.runner(env,
