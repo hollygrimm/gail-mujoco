@@ -1,7 +1,7 @@
 # MuJoCo Training on Generative Adversarial Imitation Learning (GAIL) 
 
 
-## Create Environment on Ubuntu 18.04, MuJoCo 1.31, mujoco-py==0.5.7, gym==0.8.1, Python 3.5
+## Create Environment on Ubuntu 18.04, Python 3.5, MuJoCo 1.31, gym==0.8.1, mujoco-py==0.5.7
 Install MuJoCo 1.31
 
 Create Conda Environment with Python 3.5
@@ -10,8 +10,9 @@ conda env create -f environment.yml
 source activate gail-mujoco
 ```
 Download gym 0.8.1 5f8d1fc1c6ea8a7dab44fcdab8a4ac1c24ba6759
+```
 pip install -e .
-
+```
 
 ## Download Expert Data
 create a data directory and download the expert data from [download link](https://drive.google.com/drive/folders/1h3H4AY_ZBx08hz-Ct0Nxxus-V1melu1U?usp=sharing)
@@ -82,13 +83,15 @@ python -m baselines.gail.run_mujoco --traj_limitation=50 --env_id=HumanoidStandu
 ## Run BC training on HumanoidStandup
 ```
 python -m behavior_clone --traj_limitation=5 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
-TODO: python -m behavior_clone --traj_limitation=50 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
+python -m behavior_clone --traj_limitation=50 --env_id=HumanoidStandup-v1 --expert_path=data/deterministic.trpo.HumanoidStandup.0.00.npz
 ```
 ## Create HumanoidStandup Charts
 ```
-TODO: python -m gail-eval --env=HumanoidStandup
+TODO Test Videos are written to correct folders, copy score charts here: python -m gail-eval --env=HumanoidStandup
 ```
+![HumanoidStandup normalized scores](result/HumanoidStandup-normalized-deterministic-scores.png)
 
+![HumanoidStandup unnormalized scores](result/HumanoidStandup-unnormalized-deterministic-scores.png)
 
 
 ## Evaluate Hopper
@@ -141,7 +144,7 @@ Returns from 10 Trajectories of Humanoid with a Trajectory Limitation of 10:
 
 
 
-## DO NOT DO THIS, Visualization Fails. Create Environment on Ubuntu 18.04, MuJoCo 1.50, Python 3.5
+## DO NOT DO THIS, Visualization Fails. Create Environment on Ubuntu 18.04, Python 3.5, MuJoCo 1.50, gym==0.10.5, mujoco-py==1.50.1.56
 Install MuJoCo 1.50
 ```
 mkdir -p /root/.mujoco \
@@ -160,7 +163,7 @@ sudo apt-get install libosmesa6-dev
 
 Create Conda Environment with Python 3.5
 ```
-conda env create -f environment.yml
+conda env create -f environment.mujoco1.50.yml
 source activate gail-mujoco
 ```
 
